@@ -1,12 +1,12 @@
 const ufSelect = document.getElementById("ufSelect");
 const tableBody = document.getElementById("tableBody");
 const pagination = document.getElementById("pagination");
+const rowsPerPageSelect = document.getElementById("rowsPerPage"); // 👈 new
 
 let municipios = [];
 let currentPage = 1;
-const itemsPerPage = 10;
+let itemsPerPage = parseInt(rowsPerPageSelect.value); // 👈 start with user selection
 
-// Load UFs when the page loads
 async function carregarUFs() {
   try {
     const response = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados");
@@ -26,7 +26,6 @@ async function carregarUFs() {
   }
 }
 
-// Load municipalities when a UF is selected
 async function carregarMunicipios(uf) {
   tableBody.innerHTML = "";
   pagination.innerHTML = "";
@@ -52,7 +51,6 @@ async function carregarMunicipios(uf) {
   }
 }
 
-// Render municipalities for the current page
 function renderTable() {
   tableBody.innerHTML = "";
 
@@ -70,19 +68,16 @@ function renderTable() {
   });
 }
 
-// Render pagination controls
 function renderPagination() {
   pagination.innerHTML = "";
   const totalPages = Math.ceil(municipios.length / itemsPerPage);
 
-  // Previous button
   const prevLi = document.createElement("li");
   prevLi.className = `page-item ${currentPage === 1 ? "disabled" : ""}`;
   prevLi.innerHTML = `<a class="page-link" href="#">Anterior</a>`;
   prevLi.addEventListener("click", () => changePage(currentPage - 1));
   pagination.appendChild(prevLi);
 
-  // Page numbers
   for (let i = 1; i <= totalPages; i++) {
     const li = document.createElement("li");
     li.className = `page-item ${i === currentPage ? "active" : ""}`;
@@ -91,7 +86,6 @@ function renderPagination() {
     pagination.appendChild(li);
   }
 
-  // Next button
   const nextLi = document.createElement("li");
   nextLi.className = `page-item ${currentPage === totalPages ? "disabled" : ""}`;
   nextLi.innerHTML = `<a class="page-link" href="#">Próxima</a>`;
@@ -99,7 +93,6 @@ function renderPagination() {
   pagination.appendChild(nextLi);
 }
 
-// Change current page
 function changePage(page) {
   const totalPages = Math.ceil(municipios.length / itemsPerPage);
   if (page < 1 || page > totalPages) return;
@@ -108,11 +101,17 @@ function changePage(page) {
   renderPagination();
 }
 
-// Events
+// 👇 new: listen for change in "rows per page"
+rowsPerPageSelect.addEventListener("change", () => {
+  itemsPerPage = parseInt(rowsPerPageSelect.value);
+  currentPage = 1;
+  renderTable();
+  renderPagination();
+});
+
 ufSelect.addEventListener("change", (e) => {
   const uf = e.target.value;
   carregarMunicipios(uf);
 });
 
-// Initialize
 carregarUFs();
