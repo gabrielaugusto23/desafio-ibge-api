@@ -6,6 +6,19 @@ h1 {
   color: #0d6efd;
 }
 
+/* Make the table area scrollable (only the table scrolls) */
+.table-responsive {
+  max-height: 60vh; /* Adjust height as needed, e.g. 50vh or 70vh */
+  overflow-y: auto;
+}
+
+/* Optional: keep the header visible while scrolling */
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
 /* PAGINATION STYLING */
 #pagination {
   display: flex;

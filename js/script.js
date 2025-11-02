@@ -113,7 +113,6 @@ function renderPagination() {
     li.addEventListener("click", () => changePage(i));
     numbersContainer.appendChild(li);
   }
-
   pagination.appendChild(numbersContainer);
 
   // Botão próxima
