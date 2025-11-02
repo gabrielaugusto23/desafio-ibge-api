@@ -18,22 +18,32 @@
     <h1 class="text-center mb-4">Lista de Municípios por UF</h1>
 
     <!-- UF Select -->
-    <div class="mb-3 text-center">
-      <label for="ufSelect" class="form-label">Selecione uma UF:</label>
-      <select id="ufSelect" class="form-select w-auto mx-auto">
-        <option value="">Selecione uma UF</option>
-      </select>
-
-      <div class="d-flex justify-content-center align-items-center gap-2 mb-3 mt-3">
-        <label for="rowsPerPage" class="form-label mb-0">Municípios por página:</label>
-        <select id="rowsPerPage" class="form-select w-auto">
-          <option value="10">10</option>
-          <option value="20" selected>20</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
+    <!-- UF and rows per page controls -->
+    <div class="mb-3">
+    <div class="row align-items-center">
+        <!-- Left side: UF select -->
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+        <label for="ufSelect" class="form-label">Selecione uma UF:</label>
+        <select id="ufSelect" class="form-select w-auto">
+            <option value="">Selecione uma UF</option>
         </select>
-      </div>
+        </div>
+
+        <!-- Right side: Rows per page -->
+        <div class="col-12 col-md-6 d-flex justify-content-md-end align-items-center">
+        <label for="rowsPerPage" class="form-label mb-0 me-2">Municípios por página:</label>
+        <select id="rowsPerPage" class="form-select w-auto">
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+        </select>
+        </div>
     </div>
+    </div>
+
+    <!-- Loading message -->
+    <div id="loading">Carregando...</div>
 
     <!-- Table -->
     <div class="table-responsive">
@@ -49,9 +59,11 @@
     </div>
 
     <!-- Pagination -->
-    <nav aria-label="Paginação de municípios" class="d-flex justify-content-center mt-4">
-      <ul id="pagination" class="pagination align-items-center"></ul>
-    </nav>
+<nav aria-label="Paginação de municípios" class="mt-4">
+  <div class="container px-3">
+    <ul id="pagination" class="pagination align-items-center justify-content-center"></ul>
+  </div>
+</nav>
   </main>
 
   <script src="js/script.js"></script>
