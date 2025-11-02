@@ -5,3 +5,19 @@ body {
 h1 {
   color:#0d6efd;
 }
+
+#pagination {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smoother scroll on mobile */
+  scrollbar-width: thin;
+}
+
+#pagination::-webkit-scrollbar {
+  height: 6px;
+}
+#pagination::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
