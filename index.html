@@ -20,6 +20,8 @@
     <!-- UF Select -->
     <!-- UF and rows per page controls -->
     <div class="mb-3">
+    <!-- UF and rows per page controls -->
+    <div id="controlsRow" class="mb-3">
     <div class="row align-items-center">
         <!-- Left side: UF select -->
         <div class="col-12 col-md-6 mb-3 mb-md-0">
@@ -30,7 +32,7 @@
         </div>
 
         <!-- Right side: Rows per page -->
-        <div class="col-12 col-md-6 d-flex justify-content-md-end align-items-center">
+        <div id="rowsPerPageContainer" class="col-12 col-md-6 d-flex justify-content-md-end align-items-center">
         <label for="rowsPerPage" class="form-label mb-0 me-2">Municípios por página:</label>
         <select id="rowsPerPage" class="form-select w-auto">
             <option value="10" selected>10</option>
@@ -40,6 +42,7 @@
             <option value="100">100</option>
         </select>
         </div>
+    </div>
     </div>
     </div>
 
@@ -65,13 +68,12 @@
     </div>
 
     <!-- Pagination -->
-<nav aria-label="Paginação de municípios" class="mt-4">
-  <div class="container px-3">
-    <ul id="pagination" class="pagination align-items-center justify-content-center"></ul>
-  </div>
-</nav>
+    <nav id="paginationContainer" aria-label="Paginação de municípios" class="mt-4">
+    <div class="container px-3">
+        <ul id="pagination" class="pagination align-items-center justify-content-center"></ul>
+    </div>
+    </nav>
   </main>
-
   <script src="js/script.js"></script>
 </body>
 </html>

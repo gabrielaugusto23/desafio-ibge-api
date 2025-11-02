@@ -47,7 +47,7 @@ async function carregarMunicipios(uf) {
     return;
   }
 
-    try {
+  try {
     hideError();
     loading.style.display = "block";
     const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`);
@@ -57,18 +57,30 @@ async function carregarMunicipios(uf) {
     municipios = await response.json();
     loading.style.display = "none";
 
+    // Show or hide rows-per-page and pagination depending on number of municípios
+    const rowsPerPageContainer = document.getElementById("rowsPerPageContainer");
+    const paginationContainer = document.getElementById("paginationContainer");
+
+  if (municipios.length <= 10) {
+    rowsPerPageContainer.classList.add("d-none");
+    paginationContainer.classList.add("d-none");
+  } else {
+    rowsPerPageContainer.classList.remove("d-none");
+    paginationContainer.classList.remove("d-none");
+  }
+
     if (municipios.length === 0) {
-        showError("Nenhum município encontrado para esta UF.");
-        return;
+      showError("Nenhum município encontrado para esta UF.");
+      return;
     }
 
     renderTable();
     renderPagination();
-    } catch (error) {
+  } catch (error) {
     loading.style.display = "none";
     showError("Erro ao carregar municípios. Verifique sua conexão e tente novamente.");
     console.error(error);
-    }
+  }
 }
 
 // Render tabela
