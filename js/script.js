@@ -130,6 +130,9 @@ function changePage(page) {
   renderTable();
   renderPagination();
 
+  // Reset table scroll position
+  document.querySelector(".table-responsive").scrollTop = 0;
+
   // Mantém a página atual visível ao clicar
   document.querySelector(".page-item.active")?.scrollIntoView({
     behavior: "smooth",
