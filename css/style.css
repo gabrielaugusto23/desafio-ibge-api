@@ -10,15 +10,16 @@ h1 {
 .table-responsive {
   max-height: 60vh; /* Adjust height as needed, e.g. 50vh or 70vh */
   overflow-y: auto;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
 }
 
 /* Optional: keep the header visible while scrolling */
 .table thead th {
   position: sticky;
   top: 0;
-  z-index: 2;
+  border-bottom: 2px solid #dee2e6; /* make sure the header keeps its border */
 }
-
 /* PAGINATION STYLING */
 #pagination {
   display: flex;
