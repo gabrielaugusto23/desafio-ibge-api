@@ -3,21 +3,78 @@ body {
 }
 
 h1 {
-  color:#0d6efd;
+  color: #0d6efd;
 }
 
+/* PAGINATION STYLING */
 #pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+}
+
+/* Container que contém os números */
+.page-numbers-container {
+  display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* smoother scroll on mobile */
-  scrollbar-width: thin;
+  max-width: 220px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: relative;
 }
 
-#pagination::-webkit-scrollbar {
-  height: 6px;
-}
-#pagination::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 3px;
+.page-numbers-container::-webkit-scrollbar {
+  display: none;
 }
 
+.page-item .page-link {
+  min-width: 38px;
+  text-align: center;
+  padding: 6px 10px;
+}
+
+/* Fixar os botões nas laterais */
+.page-item:first-child,
+.page-item:last-child {
+  flex-shrink: 0;
+}
+
+/* Fades nas laterais */
+#pagination::before,
+#pagination::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#pagination::before {
+  left: 40px;
+}
+
+#pagination::after {
+  right: 40px;
+}
+
+/* Melhorias gerais */
+.table {
+  background: white;
+  border-radius: 6px;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table td:nth-child(2) {
+  white-space: normal;
+  word-wrap: break-word;
+}
