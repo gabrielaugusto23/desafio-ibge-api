@@ -9,6 +9,9 @@ let itemsPerPage = parseInt(rowsPerPageSelect.value);
 
 // Carregar UFs
 async function carregarUFs() {
+  const loading = document.getElementById("loading");
+  loading.style.display = "block";
+
   try {
     const response = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados");
     const estados = await response.json();
@@ -21,9 +24,13 @@ async function carregarUFs() {
       option.textContent = `${uf.nome} (${uf.sigla})`;
       ufSelect.appendChild(option);
     });
+
   } catch (error) {
     alert("Erro ao carregar UFs. Tente novamente mais tarde.");
     console.error(error);
+  } finally {
+    // Sempre ocultar a mensagem de carregamento
+    loading.style.display = "none";
   }
 }
 
@@ -33,11 +40,22 @@ async function carregarMunicipios(uf) {
   pagination.innerHTML = "";
   municipios = [];
 
-  if (!uf) return;
+  const loading = document.getElementById("loading");
+
+  if (!uf) {
+    loading.style.display = "none";
+    return;
+  }
 
   try {
+    // Mostra a página de carregamento
+    loading.style.display = "block";
+
     const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`);
     municipios = await response.json();
+
+    // Esconde a página de carregamento
+    loading.style.display = "none";
 
     if (municipios.length === 0) {
       tableBody.innerHTML = `<tr><td colspan="2" class="text-center">Nenhum município encontrado.</td></tr>`;
@@ -48,6 +66,8 @@ async function carregarMunicipios(uf) {
     renderTable();
     renderPagination();
   } catch (error) {
+    // Esconde a página de carregamento em caso de erro
+    loading.style.display = "none";
     alert("Erro ao carregar municípios. Verifique sua conexão.");
     console.error(error);
   }
@@ -113,7 +133,7 @@ function changePage(page) {
   renderTable();
   renderPagination();
 
-  // 👇 Mantém a página atual visível ao clicar
+  // Mantém a página atual visível ao clicar
   document.querySelector(".page-item.active")?.scrollIntoView({
     behavior: "smooth",
     inline: "center",
