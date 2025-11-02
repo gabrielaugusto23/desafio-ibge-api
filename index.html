@@ -37,6 +37,7 @@
             <option value="20">20</option>
             <option value="30">30</option>
             <option value="50">50</option>
+            <option value="100">100</option>
         </select>
         </div>
     </div>
@@ -54,7 +55,13 @@
         <tbody id="tableBody"></tbody>
       </table>
       <!-- Loading message -->
-      <div id="loading">Carregando...</div>
+      <div id="loading" class="text-center" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+        <p class="mt-2 text-primary fw-bold">Carregando...</p>
+        </div>
+      <div id="error-message" class="text-danger fw-bold text-center mt-2" style="display: none;"></div>
     </div>
 
     <!-- Pagination -->
